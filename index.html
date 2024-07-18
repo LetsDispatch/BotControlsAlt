@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Let's bot controls</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .pac-container {
+            z-index: 1056;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="./onload.js" defer></script>
+    <div>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Create new search
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div data-bs-scroll="true" tabindex="-1" id="searchFilters" aria-labelledby="searchTitle">
+                            <h5 id="searchTitle">Search filters</h5>
+                            <div class="input-group mb-1">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="locationInput" placeholder="Location">
+                                    <label for="locationInput">Location</label>
+                                </div>
+                                <button class="btn btn-outline-primary" type="button" id="addLocationButton" onclick="addLocation()">Add</button>
+                            </div>
+                            <div id="milesRangeSearch" class="d-none">
+                                <label for="searchRange" class="form-label">Search radius: <span
+                                        id="searchRangeText">25mi</span></label>
+                                <input type="range" class="form-range" id="searchRange" min="0" max="300" step="1" value="25">
+                            </div>
+                            <div class="dropdown">
+                                <a class="form-text" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Add a region
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" onclick="createRegion(this)" data-bs-toggle="tooltip" data-bs-title="IA, IL, IN, KS, MI, MN, MO, ND, NE, OH, SD, WI" id="miwe">Midwest Plains</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#" onclick="createRegion(this)" data-bs-toggle="tooltip" data-bs-title="CT, DE, MA, ME, NH, NJ, NY, PA, RI, VT" id="noea">Northeast</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="createRegion(this)" data-bs-toggle="tooltip" data-bs-title="ID, MT, OR, WA, WY" id="nowe">Northwest</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="createRegion(this)" data-bs-toggle="tooltip" data-bs-title="AR, LA, MS, OK, TX" id="sout">South</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="createRegion(this)" data-bs-toggle="tooltip" data-bs-title="AL, DC, FL, GA, KY, MD, NC, SC, TN, VA, WV" id="soea">Southeast</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="createRegion(this)" data-bs-toggle="tooltip" data-bs-title="AZ, CA, CO, NM, NV, UT" id="sowe">Southwest</a></li>
+                                </ul>
+                            </div>
+                            <hr>
+                            <label for="locations" class="form-label">Current locations</label>
+                            <div id="locations">
+
+                            </div>
+                            <div class="accordion d-none" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vehicleTypesDropdown" aria-expanded="false" aria-controls="vehicleTypesDropdown">
+                                            Vehicle types
+                                        </button>
+                                    </h2>
+                                    <div id="vehicleTypesDropdown" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                                        <div class="accordion-body text-start">
+                                            <div class="row row-cols-2">
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="atvCheck" value="ATV">
+                                                    <label class="form-check-label" for="atvCheck">ATV</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="boatCheck" value="Boat">
+                                                    <label class="form-check-label" for="boatCheck">Boat</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="carCheck" value="Car">
+                                                    <label class="form-check-label" for="carCheck">Car</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="heavyCheck" value="Heavy_Equipment">
+                                                    <label class="form-check-label" for="heavyCheck">Heavy
+                                                        equipment</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="yachtCheck" value="Large_Yacht">
+                                                    <label class="form-check-label" for="yachtCheck">Large yacht</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="motorcycleCheck" value="Motorcycle">
+                                                    <label class="form-check-label" for="motorcycleCheck">Motorcycle</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="pickupCheck" value="Pickup">
+                                                    <label class="form-check-label" for="pickupCheck">Pickup</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="rvCheck" value="RV">
+                                                    <label class="form-check-label" for="rvCheck">RV</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="suvCheck" value="SUV">
+                                                    <label class="form-check-label" for="suvCheck">SUV</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="trailerCheck" value="Travel_Trailer">
+                                                    <label class="form-check-label" for="trailerCheck">Travel trailer</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="vanCheck" value="Van">
+                                                    <label class="form-check-label" for="vanCheck">Van</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-check-input" type="checkbox" id="otherCheck" value="Other">
+                                                    <label class="form-check-label" for="otherCheck">Other</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <label for="trailerType" class="form-label">Trailer type</label>
+                            <select class="form-select" aria-label="Trailer type dropdown" id="trailerType">
+                                <option selected value="all">All</option>
+                                <option value="OPEN">Open</option>
+                                <option value="ENCLOSED">Enclosed</option>
+                                <option value="DRIVEAWAY">Driveaway</option>
+                            </select>
+                            <hr>
+                            <label for="vehicleTypes" class="form-label">Vehicle type</label>
+                            <div class="row" id="vehicleTypes">
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="ATV" id="atv">
+                                        <label class="form-check-label" for="atv">
+                                        ATV
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Boat" id="boat">
+                                        <label class="form-check-label" for="boat">
+                                        Boat
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Car" id="car">
+                                        <label class="form-check-label" for="car">
+                                        Car
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="HeavyEquipment" id="heavyequipment">
+                                        <label class="form-check-label" for="heavyequipment">
+                                        Heavy equipment
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Motorcycle" id="motorcycle">
+                                        <label class="form-check-label" for="motorcycle">
+                                        Motorcycle
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Pickup" id="pickup">
+                                        <label class="form-check-label" for="pickup">
+                                        Pickup
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="RV" id="rv">
+                                        <label class="form-check-label" for="rv">
+                                        RV
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="SUV" id="suv">
+                                        <label class="form-check-label" for="suv">
+                                        SUV
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="TravelTrailer" id="traveltrailer">
+                                        <label class="form-check-label" for="traveltrailer">
+                                        Travel trailer
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Van" id="van">
+                                        <label class="form-check-label" for="van">
+                                        Van
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Other" id="other">
+                                        <label class="form-check-label" for="other">
+                                        Other
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <label for="vehicleStatus" class="form-label">Vehicle status</label>
+                            <select class="form-select" aria-label="Vehicle status dropdown" id="vehicleStatus">
+                                <option selected value="all">All</option>
+                                <option value="operableonly">Operable</option>
+                                <option value="hasinoperable">Inoperable</option>
+                            </select>
+                            <hr>
+                            <div class="mb-3">
+                                <label for="basic-url" class="form-label">Number of vehicles</label>
+                                <div class="input-group">
+                                    <div class="form-floating">
+                                        <input type="number" inputmode="numeric" min="1" max="10" class="form-control" placeholder="Min" aria-label="Min number of vehicles" id="minVehicles">
+                                        <label for="minVehicles">Min vehicles</label>
+                                    </div>
+                                    <div class="form-floating">
+                                        <input type="number" inputmode="numeric" min="1" max="10" class="form-control" placeholder="Max" aria-label="Max number of vehicles" id="maxVehicles">
+                                        <label for="maxVehicles">Max vehicles</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <label for="readyToShip" class="form-label">Ready to ship within <span id="readyToShipText">any
+                                    time</span></label>
+                            <input type="range" class="form-range" id="readyToShip" min="-1" max="60" step="1" value="-1">
+                            <hr>
+                            <div class="mb-3">
+                                <label for="minTotal" class="form-label">Minimal total payment</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" inputmode="numeric" step="1" min="0" class="form-control text-center" aria-label="Amount (to the nearest dollar)" id="minTotal">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <label for="minPpm" class="form-label">Minimal rate per vehicle per mile</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" inputmode="decimal" step="0.01" min="0" class="form-control text-center" aria-label="Amount (to the nearest dollar)" id="minPpm">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <button class="btn btn-primary w-100" type="button" onclick="createNewSearch()">Save</button>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5yaqpQ3jB4U3kWYk8p2y8kqaOugJFXb4&region=US&language=en&callback=initMap&libraries=places&v=weekly" async></script>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Modify existing searches
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="d-flex justify-content-evenly mb-2">
+                            <h3>Current searches</h3>
+                            <button type="button" class="btn btn-primary" onclick="getCurrentSearches()">Refresh</button>
+                        </div>
+                        <ul class="list-group" id="configured-searches">
+                            <li class="list-group-item">You don't have any searches</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="locationModalLabel">Add location</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group mb-1">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="locationModalInput" placeholder="Location">
+                                        <label for="locationModalInput">Location</label>
+                                    </div>
+                                </div>
+                                <div id="milesRangeSearchModal" class="d-none">
+                                    <label for="searchRangeModal" class="form-label">Search radius: <span
+                                            id="searchRangeTextModal">25mi</span></label>
+                                    <input type="range" class="form-range" id="searchRangeModal" min="0" max="300" step="1" value="25">
+                                </div>
+                                <div class="dropdown">
+                                    <a class="form-text" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Add a region
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#" onclick="createRegionModal(this)" data-bs-toggle="tooltip" data-bs-title="IA, IL, IN, KS, MI, MN, MO, ND, NE, OH, SD, WI" id="miwe">Midwest Plains</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#" onclick="createRegionModal(this)" data-bs-toggle="tooltip" data-bs-title="CT, DE, MA, ME, NH, NJ, NY, PA, RI, VT" id="noea">Northeast</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="createRegionModal(this)" data-bs-toggle="tooltip" data-bs-title="ID, MT, OR, WA, WY" id="nowe">Northwest</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="createRegionModal(this)" data-bs-toggle="tooltip" data-bs-title="AR, LA, MS, OK, TX" id="sout">South</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="createRegionModal(this)" data-bs-toggle="tooltip" data-bs-title="AL, DC, FL, GA, KY, MD, NC, SC, TN, VA, WV" id="soea">Southeast</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="createRegionModal(this)" data-bs-toggle="tooltip" data-bs-title="AZ, CA, CO, NM, NV, UT" id="sowe">Southwest</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="addLocationFromModal()">Add location</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Broker block list
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="d-flex justify-content-evenly mb-2">
+                            <h3>Broker blocks</h3>
+                            <button type="button" class="btn btn-primary" onclick="getBrokerBlocks()">Refresh</button>
+                        </div>
+                        <div class="card p-3 mb-2">
+                            <p>Add broker exclusions by typing the name in the input below.</p>
+                            <p>Bot will exclude all loads where broker name contains any value listed below ignoring case sensitivity.</p>
+                        </div>
+                        <ul class="list-group" id="block-list">
+                            <li class="list-group-item">You don't have any blocked brokers</li>
+                        </ul>
+                        <div class="input-group mt-2">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="brokerInput" placeholder="Exclude broker">
+                                <label for="brokerInput">Exclude broker</label>
+                            </div>
+                            <button class="btn btn-outline-primary" type="button" id="addBrokerBlockButton" onclick="createBrokerBlock()">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item d-none" id="admin-panel">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                        Admin controls
+                    </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="d-flex justify-content-evenly mb-2">
+                            <h3>Current bot user list</h3>
+                            <button type="button" class="btn btn-primary" onclick="getBotUsers()">Refresh</button>
+                        </div>
+                        <ul class="list-group" id="user-list">
+                            <li class="list-group-item">User list goes here</li>
+                        </ul>
+                        <div class="input-group mt-2">
+                            <span class="input-group-text">Add user</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="userInput" placeholder="Add user">
+                                <label for="userInput">Firstname Lastname</label>
+                            </div>
+                            <button class="btn btn-outline-primary" type="button" id="addUserButton" onclick="createUser()">Add</button>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-evenly mb-2">
+                            <h3>Broker block overrides</h3>
+                            <button type="button" class="btn btn-primary" onclick="getPersistentBrokerBlocks()">Refresh</button>
+                        </div>
+                        <ul class="list-group" id="persistent-block-list">
+                            <li class="list-group-item">No broker block overrides</li>
+                        </ul>
+                        <div class="input-group mt-2">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="brokerOverrideInput" placeholder="Add broker block override">
+                                <label for="brokerOverrideInput">Add broker block override</label>
+                            </div>
+                            <button class="btn btn-outline-primary" type="button" id="addBrokerBlockButton" onclick="createPersistentBrokerBlock()">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Information</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toast-text">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

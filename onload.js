@@ -183,7 +183,7 @@ function getPayloadData() {
     let maxVehicles = document.getElementById('maxVehicles').value;
     let readyToShip = document.getElementById('readyToShip').value;
     let minTotal = document.getElementById('minTotal').value;
-    let minPpm = document.getElementById('minPpm').value;
+    let minPpm = document.getElementById('minPpm').value.replace(",", ".");
     return {
         locations,
         vehicleTypes,
@@ -402,7 +402,7 @@ function renderCurrentSearches(searches){
             </div>
             <div class="input-group mb-2">
                 <span class="input-group-text">Per mile ($)</span>
-                <input id="permile${s.orderSearchId}" type="number" class="form-control" aria-label="Price per mile" ${s.perMile ? 'value="'+s.perMile+'"' : ''}>
+                <input id="permile${s.orderSearchId}" type="number" inputmode="decimal" class="form-control" aria-label="Price per mile" ${s.perMile ? 'value="'+s.perMile+'"' : ''}>
             </div>
             <div class="input-group mb-2">
                 <span class="input-group-text">Ship within</span>
@@ -590,7 +590,7 @@ function getSearchData(searchId){
     let maxVehicles = document.getElementById('maxvehicles' + searchId).value;
     let readyToShip = document.getElementById('shipwithin' + searchId).value;
     let minTotal = document.getElementById('total' + searchId).value;
-    let minPpm = document.getElementById('permile' + searchId).value;
+    let minPpm = document.getElementById('permile' + searchId).value.replace(",", ".");
     return {
         locations,
         vehicleTypes,

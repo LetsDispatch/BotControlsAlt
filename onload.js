@@ -651,6 +651,7 @@ function renderBotUsers(botUsers){
 //requests
 
 const baseAddress = "https://df81c51b4b88.ngrok-free.app/web"
+axios.defaults.headers.common['ngrok-skip-browser-warning'] = '69420'
 let token = '';
 
 function getAuthToken(){

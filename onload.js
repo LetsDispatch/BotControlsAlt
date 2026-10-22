@@ -1,44 +1,20 @@
-const options = {
-    fields: ["place_id", "formatted_address", "name", "address_components", "geometry"],
-    strictBounds: false,
-    language: "en",
-    types: ["(regions)"],
-    componentRestrictions: { country: "us" }
-};
-
 const modalElement = document.getElementById('locationModal');
 const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
-
-var place = null;
-var modalPlace = null;
+let locationPicker;
+let modalLocationPicker;
 let refSearchId = null;
 let refSearchScope = null;
 
-function initMap() {
-    const input = document.getElementById("locationInput");
-    const autocomplete = new google.maps.places.Autocomplete(input, options);
-    autocomplete.addListener("place_changed", () => {
-        place = autocomplete.getPlace();
-        if (getPlaceType(place) == 'city') {
-            document.getElementById('milesRangeSearch').classList.remove('d-none');
-        } else {
-            document.getElementById('milesRangeSearch').classList.add('d-none');
-        }
+function initLocationPickers() {
+    locationPicker = LocationPicker.attach(document.getElementById('locationInput'), location => {
+        document.getElementById('milesRangeSearch').classList.toggle('d-none', location?.type !== 'city');
+        document.getElementById('addLocationButton').disabled = !location;
     });
-
-    const inputModal = document.getElementById("locationModalInput");
-    const autocompleteModal = new google.maps.places.Autocomplete(inputModal, options);
-    autocompleteModal.addListener("place_changed", () => {
-        modalPlace = autocompleteModal.getPlace();
-        if (getPlaceType(modalPlace) == 'city') {
-            document.getElementById('milesRangeSearchModal').classList.remove('d-none');
-        } else {
-            document.getElementById('milesRangeSearchModal').classList.add('d-none');
-        }
+    modalLocationPicker = LocationPicker.attach(document.getElementById('locationModalInput'), location => {
+        document.getElementById('milesRangeSearchModal').classList.toggle('d-none', location?.type !== 'city');
+        document.getElementById('addLocationModalButton').disabled = !location;
     });
 }
-
-window.initMap = initMap;
 
 function mapAutocompleteToModal() {
     modalElement.addEventListener('shown.bs.modal', event => {
@@ -47,6 +23,7 @@ function mapAutocompleteToModal() {
 }
 
 function showModal(searchId, scope) {
+    modalLocationPicker.clear();
     refSearchId = searchId;
     refSearchScope = scope;
     modal.show();
@@ -70,6 +47,7 @@ function showPopup(text) {
 }
 
 window.onload = (_event) => {
+    initLocationPickers();
     addEventListenerToShipWithinRange();
     addEventListenerToMilesSearchRange();
     addEventListenerToMilesSearchRangeModal();
@@ -102,27 +80,25 @@ const soea = new bootstrap.Tooltip(document.getElementById('soea'));
 const sowe = new bootstrap.Tooltip(document.getElementById('sowe'));
 
 function addLocation() {
-    let input = document.getElementById('locationInput');
-    if (input.value != '') {
+    if (locationPicker.selected) {
         let locationsDiv = document.getElementById('locations');
         let cityElement = createLocation();
         locationsDiv.appendChild(cityElement);
         document.getElementById('milesRangeSearch').classList.add('d-none');
-        input.value = "";
+        locationPicker.clear();
         Telegram.WebApp.HapticFeedback.impactOccurred('light');
     }
 }
 
 function addLocationFromModal() {
-    let input = document.getElementById('locationModalInput');
-    if (input.value != '') {
+    if (modalLocationPicker.selected) {
         var locationDivId = (refSearchScope == "pu" ? "from" : "to") + refSearchId;
         let locationsDiv = document.getElementById(locationDivId);
         let cityElement = createLocationModal(refSearchScope == "pu" ? "Pickup" : "Delivery");
         locationsDiv.appendChild(cityElement);
         document.getElementById('milesRangeSearchModal').classList.add('d-none');
         modal.hide();
-        input.value = "";
+        modalLocationPicker.clear();
         Telegram.WebApp.HapticFeedback.impactOccurred('light');
     }
 }
@@ -155,14 +131,6 @@ function addEventListenerToMilesSearchRangeModal() {
     input.addEventListener("input", function() {
         text.innerHTML = input.value + 'mi';
     });
-}
-
-function getPlaceType(placeObj) {
-    if (placeObj.address_components.find(a => a.types.includes('locality')) !== undefined) {
-        return 'city';
-    } else {
-        return 'state';
-    }
 }
 
 function getPayloadData() {
@@ -222,64 +190,22 @@ function createRegionModal(option) {
 }
 
 function createLocation() {
-    let placeType = getPlaceType(place);
-    let item = document.createElement('div');
+    const item = document.createElement('div');
     item.classList.add('input-group');
-    let locationName = document.getElementById('locationInput').value;
     item.innerHTML = `<button class="btn btn-outline-primary" type="button" onclick="switchLocationType(this)">Pickup</button>
-                    <input disabled type="text" class="form-control" data-name="${getNameAttr(place)}" data-id="${place.place_id}" data-latitude="${place.geometry.location.lat()}" data-longitude="${place.geometry.location.lng()}" data-type="${placeType}" data-scope="Pickup" data-range="${getRangeAttr(placeType)}" data-state="${getStateAttr(place)}" value="${locationName + (placeType == 'city' && getRangeAttr(placeType) != 0 ? `, ${getRangeAttr(placeType)}mi` : '')}">
-                    <button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button>`;
+        <button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button>`;
+    item.insertBefore(LocationPicker.createInput(locationPicker.selected, 'Pickup',
+        document.getElementById('searchRange').value), item.lastElementChild);
     return item;
 }
 
 function createLocationModal(scope) {
-    let placeType = getPlaceType(modalPlace);
-    let item = document.createElement('div');
+    const item = document.createElement('div');
     item.classList.add('input-group');
-    let locationName = document.getElementById('locationModalInput').value;
-    item.innerHTML = `<input disabled type="text" class="form-control" data-name="${getNameAttr(modalPlace)}" data-id="${modalPlace.place_id}" data-latitude="${modalPlace.geometry.location.lat()}" data-longitude="${modalPlace.geometry.location.lng()}" data-type="${placeType}" data-scope="${scope}" data-range="${getRangeAttrModal(placeType)}" data-state="${getStateAttr(modalPlace)}" value="${locationName + (placeType == 'city' && getRangeAttrModal(placeType) != 0 ? `, ${getRangeAttrModal(placeType)}mi` : '')}">
-                    <button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button>`;
+    item.innerHTML = `<button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button>`;
+    item.prepend(LocationPicker.createInput(modalLocationPicker.selected, scope,
+        document.getElementById('searchRangeModal').value));
     return item;
-}
-
-function getRangeAttr(locType){
-    if (locType == 'city'){
-        return document.getElementById('searchRange').value;
-    }
-    else{
-        return 0;
-    }
-}
-
-function getRangeAttrModal(locType){
-    if (locType == 'city'){
-        return document.getElementById('searchRangeModal').value;
-    }
-    else{
-        return 0;
-    }
-}
-
-function getStateAttr(loc){
-    let placeType = getPlaceType(loc);
-    if (placeType == 'city')
-    {
-        return loc.address_components.find(a => a.types.includes('administrative_area_level_1')).short_name;
-    }
-    else{
-        return '';
-    }
-}
-
-function getNameAttr(loc){
-    let placeType = getPlaceType(loc);
-    if (placeType == 'city')
-    {
-        return loc.address_components.find(a => a.types.includes('locality')).short_name;
-    }
-    else{
-        return loc.address_components.find(a => a.types.includes('administrative_area_level_1')).short_name;
-    }
 }
 
 function removeLocation(button) {
@@ -379,7 +305,7 @@ function renderCurrentSearches(searches){
             <span class="mb-2 fs-5">Notifications sent - ${s.notificationsCount}</span>
             <div id="from${s.orderSearchId}">
                 <span class="input-group-text mt-2 mb-1">From</span>
-                ${s.geoCities.filter(c => c.scope == 0).map((g) => '<div class="input-group mb-1" id="' + s.orderSearchId + 'from' + g.geoCityId + '"><input type="text" class="form-control" data-name="'+ g.cityName +'" data-state="' + States[g.cityState] + '" data-type="city" data-scope="Pickup" data-id="'+ (g.placeId || '') +'" data-latitude="'+ (g.latitude !== undefined && g.latitude !== null ? g.latitude : '') +'" data-longitude="'+ (g.longitude !== undefined && g.longitude !== null ? g.longitude : '') +'" aria-label="Pickup location" value="'+ g.cityName + ', '+ States[g.cityState] + ', ' + g.radius +'mi" disabled></input><button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button></div>')}
+                ${s.geoCities.filter(c => c.scope == 0).map((g) => '<div class="input-group mb-1" id="' + s.orderSearchId + 'from' + g.geoCityId + '"><input type="text" class="form-control" data-name="'+ g.cityName +'" data-state="' + States[g.cityState] + '" data-type="city" data-range="'+ g.radius +'" data-scope="Pickup" data-id="'+ (g.placeId || '') +'" data-latitude="'+ (g.latitude !== undefined && g.latitude !== null ? g.latitude : '') +'" data-longitude="'+ (g.longitude !== undefined && g.longitude !== null ? g.longitude : '') +'" aria-label="Pickup location" value="'+ g.cityName + ', '+ States[g.cityState] + ', ' + g.radius +'mi" disabled></input><button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button></div>')}
                 ${s.geoZones.filter(c => c.scope == 0).map((g) => '<div class="input-group mb-1" id="' + s.orderSearchId + 'from' + g.geoZoneId + '"><input type="text" class="form-control" data-name="'+ States[g.state] +'" data-state="' + States[g.state] + '" aria-label="Pickup location" value="'+ States[g.state] +'" data-type="' + (g.state > 51 ? "region" : "state") +'" data-scope="Pickup" data-id="keep" disabled></input><button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button></div>')}
             </div>
             <button type="button" class="btn btn-primary mt-1" onclick="showModal(${s.orderSearchId}, 'pu')">
@@ -388,7 +314,7 @@ function renderCurrentSearches(searches){
             <hr>
             <div id="to${s.orderSearchId}">
                 <span class="input-group-text mb-1">To</span>
-                ${s.geoCities.filter(c => c.scope == 1).map((g) => '<div class="input-group mb-1" id="'+ s.orderSearchId + 'to' + g.geoCityId + '"><input type="text" class="form-control" aria-label="Delivery location" value="'+ g.cityName + ', '+ States[g.cityState] +', ' + g.radius + 'mi" data-name="'+ g.cityName +'" data-state="' + States[g.cityState] + '" data-type="city" data-scope="Delivery" data-id="'+ (g.placeId || '') +'" data-latitude="'+ (g.latitude !== undefined && g.latitude !== null ? g.latitude : '') +'" data-longitude="'+ (g.longitude !== undefined && g.longitude !== null ? g.longitude : '') +'" disabled></input><button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button></div>')}
+                ${s.geoCities.filter(c => c.scope == 1).map((g) => '<div class="input-group mb-1" id="'+ s.orderSearchId + 'to' + g.geoCityId + '"><input type="text" class="form-control" aria-label="Delivery location" value="'+ g.cityName + ', '+ States[g.cityState] +', ' + g.radius + 'mi" data-name="'+ g.cityName +'" data-state="' + States[g.cityState] + '" data-type="city" data-range="'+ g.radius +'" data-scope="Delivery" data-id="'+ (g.placeId || '') +'" data-latitude="'+ (g.latitude !== undefined && g.latitude !== null ? g.latitude : '') +'" data-longitude="'+ (g.longitude !== undefined && g.longitude !== null ? g.longitude : '') +'" disabled></input><button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button></div>')}
                 ${s.geoZones.filter(c => c.scope == 1).map((g) => '<div class="input-group mb-1" id="' + s.orderSearchId + 'to' + g.geoZoneId + '"><input type="text" class="form-control" aria-label="Delivery location" value="'+ States[g.state] +'" data-name="'+ States[g.state] +'" data-state="' + States[g.state] + '" data-type="' + (g.state > 51 ? "region" : "state") +'" data-scope="Delivery" data-id="keep" disabled></input><button class="btn btn-outline-danger" type="button" onclick="removeLocation(this)"><i class="bi bi-trash"></i></button></div>')}
             </div>
             <button type="button" class="btn btn-primary mt-1" onclick="showModal(${s.orderSearchId}, 'del')">
@@ -677,7 +603,7 @@ function createNewSearch(){
         return;
     }
     let payload = getPayloadData();
-    if (payload.locations.length == 0){
+    if (payload.locations.length == 0 && payload.trailerType !== 'ENCLOSED'){
         Telegram.WebApp.HapticFeedback.notificationOccurred('error');
         alert("Cannot create a search without any pickup or delivery location!");
         return;
@@ -692,11 +618,9 @@ function createNewSearch(){
         showPopup("Search created");
         getCurrentSearches();
         let accordeonItem2 = document.getElementById('flush-collapseTwo');
-        let bsCollapse = new bootstrap.Collapse(accordeonItem2, {
-            toggle: true
-        }).catch(function (error){
-            showPopup("There was an error while saving new search")
-        });
+        bootstrap.Collapse.getOrCreateInstance(accordeonItem2, { toggle: false }).show();
+    }).catch(function () {
+        showPopup("There was an error while saving new search");
     });
 }
 

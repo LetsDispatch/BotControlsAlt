@@ -1,0 +1,519 @@
+[
+  {
+    "term": "miami",
+    "ids": [
+      "City:FL:MIAMI",
+      "City:OK:MIAMI",
+      "City:AZ:MIAMI",
+      "City:TX:MIAMI",
+      "City:MO:MIAMI",
+      "City:IA:MIAMI",
+      "City:NM:MIAMI",
+      "City:WV:MIAMI",
+      "City:IN:MIAMI",
+      "City:FL:MIAMI-GARDENS",
+      "City:FL:MIAMI-BEACH",
+      "City:FL:MIAMI-LAKES",
+      "City:OH:MIAMISBURG",
+      "City:FL:MIAMI-SPRINGS",
+      "City:FL:MIAMI-SHORES",
+      "City:OH:MIAMI-HEIGHTS",
+      "City:OH:MIAMITOWN",
+      "City:OH:MIAMIVILLE",
+      "City:IN:MIAMI-TRAILS-ADDITION",
+      "City:OH:MIAMI-GROVE"
+    ]
+  },
+  {
+    "term": "MIAMI",
+    "ids": [
+      "City:FL:MIAMI",
+      "City:OK:MIAMI",
+      "City:AZ:MIAMI",
+      "City:TX:MIAMI",
+      "City:MO:MIAMI",
+      "City:IA:MIAMI",
+      "City:NM:MIAMI",
+      "City:WV:MIAMI",
+      "City:IN:MIAMI",
+      "City:FL:MIAMI-GARDENS",
+      "City:FL:MIAMI-BEACH",
+      "City:FL:MIAMI-LAKES",
+      "City:OH:MIAMISBURG",
+      "City:FL:MIAMI-SPRINGS",
+      "City:FL:MIAMI-SHORES",
+      "City:OH:MIAMI-HEIGHTS",
+      "City:OH:MIAMITOWN",
+      "City:OH:MIAMIVILLE",
+      "City:IN:MIAMI-TRAILS-ADDITION",
+      "City:OH:MIAMI-GROVE"
+    ]
+  },
+  {
+    "term": "mia",
+    "ids": [
+      "City:FL:MIAMI",
+      "City:FL:MIAMI-GARDENS",
+      "City:FL:MIAMI-BEACH",
+      "City:FL:MIAMI-LAKES",
+      "City:OH:MIAMISBURG",
+      "City:FL:MIAMI-SPRINGS",
+      "City:OK:MIAMI",
+      "City:FL:MIAMI-SHORES",
+      "City:OH:MIAMI-HEIGHTS",
+      "City:AZ:MIAMI",
+      "City:OH:MIAMITOWN",
+      "City:TX:MIAMI",
+      "City:OH:MIAMIVILLE",
+      "City:MO:MIAMI",
+      "City:IN:MIAMI-TRAILS-ADDITION",
+      "City:OH:MIAMI-GROVE",
+      "City:OH:MIAMI-VILLA",
+      "City:MI:MIAMI-BEACH",
+      "City:IA:MIAMI",
+      "City:NM:MIAMI"
+    ]
+  },
+  {
+    "term": "ca",
+    "ids": [
+      "State:CA:CALIFORNIA",
+      "State:NC:NORTH-CAROLINA",
+      "State:SC:SOUTH-CAROLINA",
+      "City:FL:CAPE-CORAL",
+      "City:OH:CANTON",
+      "City:NC:CARY",
+      "City:TX:CARROLLTON",
+      "City:MA:CAMBRIDGE",
+      "City:CA:CARLSBAD",
+      "City:IN:CARMEL",
+      "City:CA:CARSON",
+      "City:CA:CAMARILLO",
+      "City:CA:CARMICHAEL",
+      "City:NJ:CAMDEN",
+      "City:CO:CASTLE-ROCK",
+      "City:AZ:CASAS-ADOBES",
+      "City:IL:CARBONDALE",
+      "City:CA:CASTRO-VALLEY",
+      "City:WY:CASPER",
+      "City:ID:CALDWELL"
+    ]
+  },
+  {
+    "term": "california",
+    "ids": [
+      "State:CA:CALIFORNIA",
+      "City:MD:CALIFORNIA",
+      "City:PA:CALIFORNIA",
+      "City:MO:CALIFORNIA",
+      "City:KY:CALIFORNIA",
+      "City:VA:CALIFORNIA",
+      "City:NC:CALIFORNIA",
+      "City:MI:CALIFORNIA",
+      "City:ME:CALIFORNIA",
+      "City:CA:CALIFORNIA-CITY",
+      "City:CA:CALIFORNIA-POLYTECHNIC-STATE-UNIVERSITY",
+      "City:CA:CALIFORNIA-PINES",
+      "City:IA:CALIFORNIA-JUNCTION",
+      "City:CA:CALIFORNIA-HOT-SPRINGS",
+      "City:CA:CALIFORNIA-HEIGHTS",
+      "City:PA:CALIFORNIA-FURNACE",
+      "City:CA:CALIFORNIA-VALLEY",
+      "City:OR:CALIFORNIA-BAR",
+      "City:VA:CALIFORNIA-CROSSROADS",
+      "City:CA:LOS-ANGELES"
+    ]
+  },
+  {
+    "term": "new york",
+    "ids": [
+      "State:NY:NEW-YORK",
+      "City:NY:NEW-YORK",
+      "City:IA:NEW-YORK",
+      "City:NM:NEW-YORK",
+      "City:MO:NEW-YORK",
+      "City:KY:NEW-YORK",
+      "City:TX:NEW-YORK",
+      "City:FL:NEW-YORK",
+      "City:NY:NEW-YORK-MILLS",
+      "City:MN:NEW-YORK-MILLS",
+      "City:NY:BROOKLYN",
+      "City:NY:QUEENS",
+      "City:NY:MANHATTAN",
+      "City:NY:BRONX",
+      "City:NY:BUFFALO",
+      "City:NY:HEMPSTEAD",
+      "City:NY:ROCHESTER",
+      "City:NY:ALBANY",
+      "City:NY:STATEN-ISLAND",
+      "City:NY:BROOKHAVEN"
+    ]
+  },
+  {
+    "term": "new york ny",
+    "ids": [
+      "City:NY:NEW-YORK",
+      "City:NY:NEW-YORK-MILLS",
+      "City:NY:NYACK",
+      "City:NY:WEST-NYACK",
+      "City:NY:SOUTH-NYACK",
+      "City:NY:UPPER-NYACK",
+      "City:NY:CENTRAL-NYACK",
+      "City:NM:NEW-YORK",
+      "City:KY:NEW-YORK"
+    ]
+  },
+  {
+    "term": "ny new york",
+    "ids": [
+      "City:NY:ALBANY",
+      "City:NY:ALLEGANY",
+      "City:NY:NORTH-HARMONY",
+      "City:NY:HARMONY",
+      "City:NY:BETHANY",
+      "City:NY:ORISKANY",
+      "City:NY:LAKE-OSIRIS-COLONY",
+      "City:NY:VALATIE-COLONY",
+      "City:NY:MONTCLAIR-COLONY",
+      "City:NY:BAY-COLONY",
+      "City:NY:EAST-BETHANY",
+      "City:NY:SOUTH-ALBANY",
+      "City:NY:WEST-BETHANY",
+      "City:NY:NYACK",
+      "City:NY:WEST-NYACK",
+      "City:NY:SOUTH-NYACK",
+      "City:NY:UPPER-NYACK",
+      "City:NY:CENTRAL-NYACK",
+      "City:NY:NEW-YORK",
+      "City:NY:NEW-YORK-MILLS"
+    ]
+  },
+  {
+    "term": "90210",
+    "ids": [
+      "City:CA:BEVERLY-HILLS"
+    ]
+  },
+  {
+    "term": "902",
+    "ids": [
+      "City:CA:DOWNEY",
+      "City:CA:COMPTON",
+      "City:CA:SOUTH-GATE",
+      "City:CA:HAWTHORNE",
+      "City:CA:REDONDO-BEACH",
+      "City:CA:LYNWOOD",
+      "City:CA:GARDENA",
+      "City:CA:HUNTINGTON-PARK",
+      "City:CA:RANCHO-PALOS-VERDES",
+      "City:CA:CULVER-CITY",
+      "City:CA:BELL-GARDENS",
+      "City:CA:MANHATTAN-BEACH",
+      "City:CA:BELL",
+      "City:CA:BEVERLY-HILLS",
+      "City:CA:LAWNDALE",
+      "City:CA:MAYWOOD",
+      "City:CA:HERMOSA-BEACH",
+      "City:CA:EL-SEGUNDO",
+      "City:CA:MALIBU",
+      "City:CA:MARINA-DEL-REY"
+    ]
+  },
+  {
+    "term": "02108",
+    "ids": [
+      "City:MA:BOSTON"
+    ]
+  },
+  {
+    "term": "10001",
+    "ids": []
+  },
+  {
+    "term": "60601",
+    "ids": [
+      "City:IL:CHICAGO"
+    ]
+  },
+  {
+    "term": "chicgao",
+    "ids": [
+      "City:IL:CHICAGO",
+      "City:IL:NORTH-CHICAGO",
+      "City:IL:CHICAGO-HEIGHTS",
+      "City:IN:EAST-CHICAGO",
+      "City:IL:WEST-CHICAGO",
+      "City:IL:CHICAGO-RIDGE",
+      "City:IL:SOUTH-CHICAGO-HEIGHTS",
+      "City:IN:NEW-CHICAGO",
+      "City:WI:LITTLE-CHICAGO",
+      "City:PA:LITTLE-CHICAGO",
+      "City:AK:CHICAGO-CREEK",
+      "City:MN:LITTLE-CHICAGO",
+      "City:OH:NEW-CHICAGO",
+      "City:MT:NEW-CHICAGO",
+      "City:OH:LITTLE-CHICAGO",
+      "City:CA:NEW-CHICAGO"
+    ]
+  },
+  {
+    "term": "chicago il",
+    "ids": [
+      "City:IL:CHICAGO",
+      "City:IL:NORTH-CHICAGO",
+      "City:IL:WEST-CHICAGO",
+      "City:IL:CHICAGO-HEIGHTS",
+      "City:IL:CHICAGO-RIDGE",
+      "City:IL:SOUTH-CHICAGO-HEIGHTS",
+      "City:MI:CHICAGON"
+    ]
+  },
+  {
+    "term": "los an",
+    "ids": [
+      "City:CA:LOS-ANGELES",
+      "City:TX:LOS-ANGELES",
+      "City:CA:EAST-LOS-ANGELES",
+      "City:CA:LAKE-LOS-ANGELES"
+    ]
+  },
+  {
+    "term": "los angeles ca",
+    "ids": [
+      "City:CA:LOS-ANGELES",
+      "City:CA:EAST-LOS-ANGELES",
+      "City:CA:LAKE-LOS-ANGELES",
+      "City:TX:LOS-ANGELES"
+    ]
+  },
+  {
+    "term": "san francisco",
+    "ids": [
+      "City:CA:SAN-FRANCISCO",
+      "City:NM:SAN-FRANCISCO",
+      "City:NM:SAN-FRANCISCO-PLAZA",
+      "City:CA:SOUTH-SAN-FRANCISCO",
+      "City:ME:SAINT-FRANCIS",
+      "City:KY:SAINT-FRANCIS",
+      "City:FL:SAINT-FRANCIS",
+      "City:TX:SAINT-FRANCIS",
+      "City:MN:SAINT-FRANCIS"
+    ]
+  },
+  {
+    "term": "san fransisco",
+    "ids": [
+      "City:CA:SAN-FRANCISCO",
+      "City:CA:SOUTH-SAN-FRANCISCO",
+      "City:NM:SAN-FRANCISCO",
+      "City:NM:SAN-FRANCISCO-PLAZA"
+    ]
+  },
+  {
+    "term": "new ork",
+    "ids": [
+      "State:NY:NEW-YORK",
+      "City:NY:NEW-YORK",
+      "City:NY:BROOKLYN",
+      "City:NY:QUEENS",
+      "City:NY:MANHATTAN",
+      "City:NY:BRONX",
+      "City:NY:BUFFALO",
+      "City:NY:HEMPSTEAD",
+      "City:NY:ROCHESTER",
+      "City:NY:ALBANY",
+      "City:NY:STATEN-ISLAND",
+      "City:NY:BROOKHAVEN",
+      "City:NY:POUGHKEEPSIE",
+      "City:NY:SYRACUSE",
+      "City:NY:ISLIP",
+      "City:NY:OYSTER-BAY",
+      "City:NY:NORTH-HEMPSTEAD",
+      "City:NY:BABYLON",
+      "City:NY:YONKERS",
+      "City:NY:HUNTINGTON"
+    ]
+  },
+  {
+    "term": "st louis",
+    "ids": [
+      "City:MO:ST.-LOUIS",
+      "City:MI:ST.-LOUIS",
+      "City:OK:ST.-LOUIS",
+      "City:MN:ST.-LOUIS-PARK",
+      "City:OH:ST.-LOUISVILLE",
+      "City:IL:EAST-ST.-LOUIS",
+      "City:MO:LAKE-ST.-LOUIS",
+      "City:MS:BAY-ST.-LOUIS",
+      "City:LA:RIDGECREST",
+      "City:LA:FOREST",
+      "City:LA:FROST",
+      "City:KY:WEST-LOUISVILLE",
+      "City:LA:MANIFEST",
+      "City:LA:PREVOST",
+      "City:LA:DUCKROOST",
+      "City:LA:VILLAGE-DE-L\u0027EST",
+      "City:LA:BRINGHURST",
+      "City:LA:GOLD-DUST",
+      "City:LA:BAPTIST",
+      "City:LA:OAK-FOREST"
+    ]
+  },
+  {
+    "term": "St. Louis, MO",
+    "ids": [
+      "City:MO:ST.-LOUIS",
+      "City:MO:LAKE-ST.-LOUIS",
+      "City:MI:ST.-LOUIS",
+      "City:OK:ST.-LOUIS"
+    ]
+  },
+  {
+    "term": "saint louis",
+    "ids": [
+      "City:OR:SAINT-LOUIS",
+      "City:VA:SAINT-LOUIS",
+      "City:GA:SAINT-LOUIS",
+      "City:CA:SAINT-LOUIS",
+      "City:LA:SAINT-LOUIS",
+      "City:IN:SAINT-LOUIS-CROSSING",
+      "City:HI:SAINT-LOUIS-HEIGHTS",
+      "City:LA:SAINT-LOUIS-PLANTATION",
+      "City:IN:LITTLE-SAINT-LOUIS",
+      "City:IN:OLD-SAINT-LOUIS",
+      "City:LA:SAINT-CLAIR",
+      "City:LA:SAINT-ELMO",
+      "City:LA:SAINT-BERNARD-GROVE",
+      "City:LA:SAINT-TAMMANY",
+      "City:LA:SAINT-ROSALIE",
+      "City:LA:SAINT-BERNARD",
+      "City:LA:SAINT-BENEDICT",
+      "City:LA:BRULY-SAINT-MARTIN",
+      "City:LA:SAINT-LANDRY",
+      "City:LA:SAINT-GENEVIEVE"
+    ]
+  },
+  {
+    "term": "winston-salem",
+    "ids": [
+      "City:NC:WINSTON-SALEM"
+    ]
+  },
+  {
+    "term": "Coeur d\u0027Alene",
+    "ids": [
+      "City:ID:COEUR-D\u0027ALENE"
+    ]
+  },
+  {
+    "term": "San Jos\u00E9",
+    "ids": [
+      "City:CA:SAN-JOSE",
+      "City:NM:SAN-JOSE",
+      "City:IL:SAN-JOSE",
+      "City:AZ:SAN-JOSE",
+      "City:TX:SAN-JOSE",
+      "City:FL:SAN-JOSE-FOREST",
+      "City:CA:SOUTH-SAN-JOSE-HILLS",
+      "City:CA:MISSION-SAN-JOSE-DISTRICT"
+    ]
+  },
+  {
+    "term": "southwest",
+    "ids": [
+      "Region:SOUTHWEST:SOUTHWEST",
+      "Region:SOUTHEAST:SOUTHEAST",
+      "City:PA:SOUTHWEST",
+      "City:IN:SOUTHWEST",
+      "City:FL:SOUTHWEST-RANCHES",
+      "City:PA:SOUTHWEST-GREENSBURG",
+      "City:ME:SOUTHWEST-HARBOR",
+      "City:PA:SOUTHWEST-MADISON",
+      "City:TX:SOUTHWEST-SANDHILL",
+      "City:MO:SOUTHWEST-CITY",
+      "City:NY:SOUTHWEST-HOOSICK",
+      "City:NY:SOUTHWEST-OSWEGO",
+      "City:CA:SOUTHWEST-VILLAGE",
+      "City:TX:TAFT-SOUTHWEST",
+      "City:FL:DELAND-SOUTHWEST",
+      "City:NY:SOUTHEAST",
+      "City:AZ:SIERRA-VISTA-SOUTHEAST",
+      "City:MT:HELENA-VALLEY-SOUTHEAST",
+      "City:FL:SOUTHEAST-ARCADIA",
+      "City:NY:SOUTHEAST-OWASCO"
+    ]
+  },
+  {
+    "term": "midwest plains",
+    "ids": [
+      "Region:MIDWESTPLAINS:MIDWEST-PLAINS",
+      "City:MO:WEST-PLAINS"
+    ]
+  },
+  {
+    "term": "northeast",
+    "ids": [
+      "Region:NORTHEAST:NORTHEAST",
+      "Region:NORTHWEST:NORTHWEST",
+      "City:NY:NORTHEAST-ITHACA",
+      "City:PA:NORTHEAST-MADISON",
+      "City:ME:NORTHEAST-HARBOR",
+      "City:MD:NORTHEAST-HEIGHTS",
+      "City:NY:NORTHEAST-CENTER",
+      "City:MT:HELENA-VALLEY-NORTHEAST",
+      "City:WY:ALPINE-NORTHEAST",
+      "City:PA:NORTHWEST-HARBORCREEK",
+      "City:MI:COMSTOCK-NORTHWEST",
+      "City:NY:NORTHWEST-HARBOR",
+      "City:MT:HELENA-VALLEY-NORTHWEST",
+      "City:MA:NORTHWEST-HARWICH",
+      "City:CT:NORTHWEST-HARWINTON",
+      "City:NY:NORTHWEST-ITHACA",
+      "City:PA:NEW-CASTLE-NORTHWEST",
+      "City:NC:NORTHWEST",
+      "City:WY:ALPINE-NORTHWEST",
+      "City:WA:NORTHWEST-STANWOOD"
+    ]
+  },
+  {
+    "term": "mi",
+    "ids": [
+      "Region:MIDWESTPLAINS:MIDWEST-PLAINS",
+      "State:MI:MICHIGAN",
+      "State:MN:MINNESOTA",
+      "State:MS:MISSISSIPPI",
+      "State:MO:MISSOURI",
+      "State:WY:WYOMING",
+      "City:FL:MIAMI",
+      "City:MN:MINNEAPOLIS",
+      "City:WI:MILWAUKEE",
+      "City:CA:MISSION-VIEJO",
+      "City:FL:MIRAMAR",
+      "City:TX:MIDLAND",
+      "City:FL:MIAMI-GARDENS",
+      "City:OH:MIDDLETOWN",
+      "City:MT:MISSOULA",
+      "City:TX:MISSION",
+      "City:FL:MIAMI-BEACH",
+      "City:CA:MILPITAS",
+      "City:TX:MISSOURI-CITY",
+      "City:NJ:MIDDLETOWN"
+    ]
+  },
+  {
+    "term": "00000",
+    "ids": []
+  },
+  {
+    "term": "----",
+    "ids": []
+  },
+  {
+    "term": "",
+    "ids": []
+  },
+  {
+    "term": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "ids": []
+  }
+]

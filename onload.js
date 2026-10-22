@@ -650,8 +650,8 @@ function renderBotUsers(botUsers){
 
 //requests
 
-const baseAddress = "https://35dd-38-242-244-233.ngrok-free.app/web"
-axios.defaults.headers.common['ngrok-skip-browser-warning'] = '69420'
+const baseAddress = "https://golden-pseudochylous-zaiden.ngrok-free.dev/web";
+axios.defaults.headers.common['ngrok-skip-browser-warning'] = '1';
 let token = '';
 
 function getAuthToken(){
